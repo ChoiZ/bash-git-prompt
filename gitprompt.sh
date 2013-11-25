@@ -42,33 +42,36 @@ function git_prompt_config()
   local White='\[\033[37m\]'
   local Red="\[\033[0;31m\]"
   local Blue="\[\033[0;34m\]"
+  local Green="\[\033[0;32m\]"    # Green
 
   # Default values for the appearance of the prompt. Configure at will.
-  GIT_PROMPT_PREFIX="["
-  GIT_PROMPT_SUFFIX="]"
+  GIT_PROMPT_PREFIX="("
+  GIT_PROMPT_SUFFIX=")"
   GIT_PROMPT_SEPARATOR="|"
-  GIT_PROMPT_BRANCH="${Magenta}"
+  GIT_PROMPT_BRANCH="${Green}"
   GIT_PROMPT_STAGED="${Red}● "
   GIT_PROMPT_CONFLICTS="${Red}✖ "
   GIT_PROMPT_CHANGED="${Blue}✚ "
   GIT_PROMPT_REMOTE=" "
   GIT_PROMPT_UNTRACKED="…"
-  GIT_PROMPT_CLEAN="${BoldGreen}✔"
+  GIT_PROMPT_CLEAN="${Green}✔ "
 
   # Various variables you might want for your PS1 prompt instead
-  local Time12a="\$(date +%H:%M)"
+  # local Time12a="\$(date +%H:%M)"
+  local Time12a="${IntenseBlack}\t${ResetColor}"
   # local Time12a="(\$(date +%H:%M:%S))"
   # local Time12a="(\@))"
   local PathShort="\w"
+  local UserHost="\u@\h"
 
   if [ "x${GIT_PROMPT_START}" == "x" ]; then
-    PROMPT_START="${Yellow}${PathShort}${ResetColor}"
+    PROMPT_START="${White}${Time12a}${ResetColor} ${Blue}${UserHost}${ResetColor} ${Yellow}${PathShort}${ResetColor}"
   else
     PROMPT_START="${GIT_PROMPT_START}"
   fi
 
   if [ "x${GIT_PROMPT_END}" == "x" ]; then
-    PROMPT_END=" \n${White}${Time12a}${ResetColor} $ "
+    PROMPT_END=" $ "
   else
     PROMPT_END="${GIT_PROMPT_END}"
   fi
@@ -76,7 +79,7 @@ function git_prompt_config()
   EMPTY_PROMPT="${PROMPT_START}$($prompt_callback)${PROMPT_END}"
 
   # fetch remote revisions every other $GIT_PROMPT_FETCH_TIMEOUT (default 5) minutes
-  GIT_PROMPT_FETCH_TIMEOUT=${1-5}
+  GIT_PROMPT_FETCH_TIMEOUT=${1-1}
   if [ "x$__GIT_STATUS_CMD" == "x" ]
   then
     git_prompt_dir
