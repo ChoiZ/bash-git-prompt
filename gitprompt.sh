@@ -70,6 +70,7 @@ function git_prompt_config()
   # local Time12a="(\$(date +%H:%M:%S))"
   # local Time12a="(\@))"
   local PathShort="\w"
+  local UserHost="\u@\h"
 
   # if the envar is defined, source the file for custom colors
   if [[ -n "$__GIT_PROMPT_COLORS_FILE" && -f "$__GIT_PROMPT_COLORS_FILE" ]]; then
@@ -100,7 +101,7 @@ function git_prompt_config()
     # Please do not add colors to these symbols
     GIT_PROMPT_SYMBOLS_AHEAD="↑·"
     GIT_PROMPT_SYMBOLS_BEHIND="↓·"
-    GIT_PROMPT_SYMBOLS_PREHASH=":"    
+    GIT_PROMPT_SYMBOLS_PREHASH=":"
   fi
 
   if [ "x${GIT_PROMPT_SHOW_LAST_COMMAND_INDICATOR}" == "x1" ]; then
@@ -153,7 +154,7 @@ function git_prompt_config()
   fi
 
   # fetch remote revisions every other $GIT_PROMPT_FETCH_TIMEOUT (default 5) minutes
-  GIT_PROMPT_FETCH_TIMEOUT=${1-5}
+  GIT_PROMPT_FETCH_TIMEOUT=${1-1}
   if [ "x$__GIT_STATUS_CMD" == "x" ]
   then
     git_prompt_dir
