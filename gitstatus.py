@@ -12,25 +12,25 @@ Shamelessly ripped from http://www.daniweb.com/software-development/python/code/
 __all__ = ["Print"]
 import sys
 try:
-  Print = eval("print") # python 3.0 case
+    Print = eval("print") # python 3.0 case
 except SyntaxError:
-  try:
-    D = dict()
-    exec("from __future__ import print_function\np=print", D)
-    Print = D["p"] # 2.6 case
-    del D
-  except SyntaxError:
-    del D
-    def Print(*args, **kwd): # 2.4, 2.5, define our own Print function
-      fout = kwd.get("file", sys.stdout)
-      w = fout.write
-      if args:
-        w(str(args[0]))
-        sep = kwd.get("sep", " ")
-        for a in args[1:]:
-          w(sep)
-          w(str(a))
-      w(kwd.get("end", "\n"))
+    try:
+        D = dict()
+        exec("from __future__ import print_function\np=print", D)
+        Print = D["p"] # 2.6 case
+        del D
+    except SyntaxError:
+        del D
+        def Print(*args, **kwd): # 2.4, 2.5, define our own Print function
+            fout = kwd.get("file", sys.stdout)
+            w = fout.write
+            if args:
+                w(str(args[0]))
+                sep = kwd.get("sep", " ")
+                for a in args[1:]:
+                    w(sep)
+                    w(str(a))
+            w(kwd.get("end", "\n"))
 
 
 # change those symbols to whatever you prefer
