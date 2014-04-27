@@ -1,5 +1,6 @@
 local Time12a="\$(date +%H:%M:%S)"
 local PathShort="\w"
+local UserHost="\u@\h"
 
 # These are the color definitions used by gitprompt.sh
 GIT_PROMPT_PREFIX="("                 # start of the git info string
